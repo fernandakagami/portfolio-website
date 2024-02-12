@@ -1,0 +1,81 @@
+.letter {
+  background: linear-gradient(0deg, rgba(255, 177, 71, 1) 0%, rgba(255, 108, 99, 1) 50%, rgba(184, 106, 223, 1) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  -webkit-text-stroke: 1px black;
+  text-stroke: 1px black;
+}
+
+.range {
+  width: 12.5em;
+  width: 100%;
+}
+
+.range {
+  color: rgba(255, 108, 99, 1);
+  --thumb-height: 1.025em;
+  --track-height: 0.305em;
+  --track-color: rgba(0, 0, 0, 0.2);
+  --brightness-hover: 180%;
+  --brightness-down: 80%;
+  --clip-edges: 0.125em;
+}
+
+/* === range commons === */
+.range {
+  position: relative;
+  background: #fff0;
+  overflow: hidden;
+}
+
+.range:active {
+  cursor: grabbing;
+}
+
+.range:disabled {
+  filter: grayscale(1);
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+
+/* === WebKit specific styles === */
+.range,
+.range::-webkit-slider-runnable-track,
+.range::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  transition: all ease 100ms;
+  height: var(--thumb-height);
+}
+
+.range::-webkit-slider-thumb {
+  --thumb-radius: calc((var(--thumb-height) * 0.5) - 1px);
+  --clip-top: calc((var(--thumb-height) - var(--track-height)) * 0.5 - 0.5px);
+  --clip-bottom: calc(var(--thumb-height) - var(--clip-top));
+  --clip-further: calc(100% + 1px);
+  --box-fill: calc(-100vmax - var(--thumb-width, var(--thumb-height))) 0 0 100vmax currentColor;
+
+  width: var(--thumb-width, var(--thumb-height));
+  background: linear-gradient(currentColor 0 0) scroll no-repeat left center / 50% calc(var(--track-height) + 1px);
+  background-color: currentColor;
+  box-shadow: var(--box-fill);
+  border-radius: var(--thumb-width, var(--thumb-height));
+
+  filter: brightness(100%);
+  clip-path: polygon(100% -1px,
+      var(--clip-edges) -1px,
+      0 var(--clip-top),
+      -100vmax var(--clip-top),
+      -100vmax var(--clip-bottom),
+      0 var(--clip-bottom),
+      var(--clip-edges) 100%,
+      var(--clip-further) var(--clip-further));
+}
+
+.range::-webkit-slider-runnable-track {
+  background: linear-gradient(var(--track-color) 0 0) scroll no-repeat center / 100% calc(var(--track-height) + 1px);
+}
+
+.wrapper {
+  margin: 0 auto;
+  width: 100%;
+}
